@@ -55,7 +55,9 @@ class ClientTransaction:
 
     def get_frames(self, home_page_response: bs4.BeautifulSoup) -> bs4.ResultSet:
         # loading-x-anim-0...loading-x-anim-3
-        return home_page_response.select("[id^='loading-x-anim']")
+        # return home_page_response.select("[id^='loading-x-anim']")
+        frames = home_page_response.find_all('svg', id=lambda x: x and x.startswith('loading-x-anim'))
+        return frames
 
     def get_2d_array(self, key_bytes: List[Union[float, int]], home_page_response: bs4.BeautifulSoup, frames: Optional[bs4.ResultSet] = None) -> List[List[int]]:
         if frames is None:
